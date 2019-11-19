@@ -1,0 +1,136 @@
+\documentclass[a4paper]{article}
+
+\usepackage[utf8x]{inputenc}
+\usepackage{listingsutf8}
+\usepackage{listings-ext}
+\usepackage{listings}
+\usepackage{enumitem}
+\usepackage[12pt]{extsizes}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsfonts}
+\usepackage[left=2cm,right=2cm,top=2cm,bottom=2cm,bindingoffset=0cm]{geometry}
+\usepackage{graphicx}
+\usepackage[T2A]{fontenc}
+\usepackage{amsthm}
+\usepackage{bm}
+\usepackage{fancyvrb}
+\usepackage[russian]{babel}
+
+\newtheorem{lemma}{Лемма}
+\newtheorem{corol}{Следствие}
+\newtheorem{theorem}{Теорема}
+\newtheorem{problem}{Задача}
+\newtheorem*{solution}{Решение}
+
+\begin{document}
+
+\textbf{Домашнее задание № 2.} \textit{Алеся Демешко, 797}
+
+\begin{problem}
+Докажите, что конус K, является выпуклым $\Leftrightarrow$ он замкнут относительно суммирования, т. е. $x + y \in K$ для всех $x, y \in K$
+\end{problem}
+
+\begin{proof}[Решение]
+Если K - замкнут $\Rightarrow \forall x, y \in K, \forall \alpha \in [0, 1],$ будет выполняться $\alpha x + (1 - \alpha) y \in K$. Возьмём $\alpha = \frac{1}{2}$, тогда $\frac{1}{2} x+ \frac{1}{2}y \in K$.
+ Т. к. К - конус, то $\forall t \textgreater 0$ $ \forall x \in K$, $tx \in K \Rightarrow 2(\frac{1}{2}x+ \frac{1}{2}y) = x+y \in K$  \newline
+С другой стороны, поскольку К - конус $\Rightarrow \forall t \textgreater 0$ $ \forall x \in K$, $t x \in K \Rightarrow \forall \alpha \in [0, 1], \alpha x \in K,  (1 - \alpha) y \in K$
+и замкнут относительно суммирования $\Rightarrow \forall  z \in K, \forall w \in K, z+w \in K \Rightarrow$ возьмём $z =  \alpha x $ и $ w =  (1 - \alpha) y$, тогда $\alpha x + (1 - \alpha) y \in K$.
+\end{proof}
+
+\begin{problem}
+Пусть $C$ -  выпуклое множество в вещественном нормированном векторном пространстве. Покажите, что замыкание $\overline{C}$ и внутренность $\Int(C)$ множества $C$ также являются выпуклыми.
+\end{problem}
+
+\begin{proof}[Решение]
+Рассмотрим две последовательности точек, лежащих внутри C и $x, y$ лежащих в замыкании $\overline{C}$: $\{x_n\}_{n=1}^{\infty}, \{y_n\}_{n=1}^{\infty}$, такие что $x_n \rightarrow x, y_n \rightarrow y$ при $n\xrightarrow{}\infty$. Пусть $z_n(\alpha)= \alpha x_n + (1-\alpha)y_n$, $z(\alpha)= \alpha x + (1-\alpha)y$, тогда $z_n(\alpha) \rightarrow z(\alpha)$ при $n\xrightarrow{}\infty$. Т. к. $C$ - выпуклое, поэтому $\forall \alpha \in [0, 1]$  выполнено $z_n(\alpha)\in C$ и $z(\alpha)\in \overline{C} \Rightarrow \overline{C}$ - выпуклое.  \newline
+Докажем от противного: пусть $int(C)$ не замкнуто, тогда $\exists \alpha \in [0,1]$ $\exists  x, y \in int(C)$ такие что $z = \alpha x+ (1-\alpha)y \notin int(C) $. Возьмём некоторую окрестность точки $z$ и в ней точку d $\Rightarrow$ d не лежит в C. Возьмём точку $x_1$ из некоторой окрестности x и $y_1$ из некоторой окрестности y, так чтобы d попала в $[x, y]$ (это всегда можно сделать так как мы выбираем окрестность произвольно). В итоге мы получим $\exists x_1 y_1 \in C, \exists d\in[x_1, y_1] u \notin C$, что противоречит выпуклости C.
+\end{proof}
+
+\begin{problem} Пусть C и D - множества в вещественном векторном пространстве. Покажите, что:
+\begin{enumerate}[label=(\alph*)]
+    \item Conv$(C \cup D)$ = Conv (Conv $(C) \cup$  Conv $(D))$.
+    \item Conv $(C \cap D) \subseteq $ Conv $(C) \cap $ Conv $(D)$, причем равенство может не достигаться (приведите пример).
+\end{enumerate}
+\end{problem}
+
+\begin{proof}[Решение]
+\begin{enumerate}[label=(\alph*)]
+    \item Пусть $LHS = Conv (C \cup D)$, $RHS = Conv (Conv (C) \cup  Conv (D))$ \newline
+        Пусть $x \in RHS \Leftrightarrow \forall$ выпуклого $P$, что $P \supset Conv (C) \cup  Conv (D)$ верно, что $x \in P \Leftrightarrow \forall$ выпуклого $P$, что $Conv(C) \subset P$ и $Conv(D) \subset P$ верно $x \in P$. (1) \newline
+        Пусть $x \in LHS \Leftrightarrow \forall$ выпуклого $P$, что $(C \cup D) \subset P$ $x \in P \Leftrightarrow \forall$ выпуклого $P$, что $C \subset P$ и $D \subset P: x \in P $. (2) \newline
+        $\forall C$ и выпуклого $P$ верно $C \subset P \Leftrightarrow Conv(C) \subset P \Rightarrow (1) = (2)$
+    \item Пусть $x \in RHS \Leftrightarrow x \in Conv(C)$ и $x \in Conv(D) \Leftrightarrow \forall$ выпуклого $P$, что $C \subset P$ $x \in P$ и $\forall$ выпуклого $P$, что $D \subset P$ $x \in P$ \newline
+    Пусть $x \in LHS \Leftrightarrow \forall$ выпуклого $P \subset (C \cap D)$ $x \in P \Rightarrow \forall$ выпуклого $P \supset C$ $x \in P$ и $\forall$ выпуклого $P \supset D$ $x \in P \Leftrightarrow x \in RHS$ \newline
+    Пример, когда равенство не достигается: Пусть C это множество из трёх точек, D аналогично, причём точки не пересекаются - пересечение пустое множество. Разместим точки так, чтобы треугольники, которые они образовывают пересекались - выпуклые оболочки пересекаются.
+\end{enumerate}
+\end{proof}
+
+\begin{problem}
+\end{problem}
+
+\begin{proof}[Решение]
+\end{proof}
+
+\begin{problem}
+Пусть $E$~--- выпуклое множество в вещественном нормированном векторном пространстве, и пусть $f : \overline{E} \to \R$~--- функция, определенная на замыкании множества $E$. Покажите, что если $f$ непрерывная, то из выпуклости сужения $f \vert_E : E \to \R$ следует выпуклость $f$.
+\end{problem}
+
+\begin{proof}[Решение]
+По определению $\forall x, y\in  \overline{E}$ $ \exists \{x_n\}_{n=1}^{\infty}, \{y_n\}_{n=1}^{\infty} \in E$, такие что $x_n \rightarrow x, y_n \rightarrow y$ при $n\xrightarrow{}\infty$.
+Так как $f$ выпукла на $E \Rightarrow\forall \alpha \in [0, 1]$ $f(\alpha x_n + (1 - \alpha) y_n)\leq \alpha f(x_n) + (1 - \alpha)f(y_n)$ (определение выпуклости). По условию $f$ непрерывна $ \Rightarrow f(\alpha x_n + (1 - \alpha) y_n) \xrightarrow{} f(\alpha x + (1 - \alpha) y), f(x_n) \xrightarrow{} f(x), f(y_n) \xrightarrow{} f(y)$. В итоге получим $f(\alpha x + (1 - \alpha) y)\leq \alpha f(x) + (1 - \alpha)f(y) \Rightarrow$ f - выпукла на $\overline{E}$
+\end{proof}
+
+\begin{problem}
+Докажите, что функция $f(x) = ln(\sum_{i = 1}^n e^{x_i})$ является выпуклой.
+\end{problem}
+
+\begin{proof}[Решение]
+$x$ выпуклая функция $\Rightarrow \exp(x)$ тоже выпукла как монотонная суперпозиция $\Rightarrow \sum_{i = 1}^n e^{x_i}$ выпукла как положительная взвешенная сумма с $c_i = 1$ $\Rightarrow ln(\sum_{i = 1}^n e^{x_i})$ выпукла как монотонная суперпозиция.
+\end{proof}
+
+\begin{problem}
+Опираясь на стандартные примеры выпуклых функций и утверждение об операциях, сохраняющих выпуклость, объясните, почему каждая из следующих функций $f$ является выпуклой:
+\begin{enumerate}[label=(\alph*)]
+    \item $f : R^n \to R$~--- функция $f(x) := \max\{ 0, \langle a, x \rangle - b \}$, где $a \in \R^n$, $b \in \R$.
+    \item $f : R^n \to R$~--- функция $f(x) := \sum_{i=1}^n c_i \ln(1 + e^{\langle a_i, x \rangle}) + \frac{\mu}{2} \| x \|^2$, где $\mu, c_1, \dots, c_n \geq 0$, $a_1, \dots, a_n \in \R^n$.
+    \item $f : R^n \to R$~--- функция $f(x) := \max_{1 \leq i \leq n} c_i \ln( 1 + e^{|x_i|} )$, где $c_1, \dots, c_n \geq 0$.
+    \item $f : E \to R$~--- функция $f(x) := -\ln \Det( B - x_1 A_1 - \dots - x_n A_n )$, где $A_1, \dots, A_n, B \in \S^n$, $E := \{ x \in \R^n : x_1 A_1 + \dots + x_n A_n \prec B \}$.
+\end{enumerate}
+\end{problem}
+
+\begin{proof}[Решение]
+\begin{enumerate}[label=(\alph*)]
+    \item $f(x) = x$ выпуклая, афинное преобразование сохраняет выпуклость, значит $f(x) = \langle a, x \rangle - b$ выпуклая. Max тоже сохраняет выпуклость $\Rightarrow f(x) := \max\{ 0, \langle a, x \rangle - b \}$ выпуклая.
+    \item $f(x) = \langle a_i, x \rangle$ выпуклая, монотонная суперпозиция сохраняет выпуклость $ \Rightarrow f(x) = e^{\langle a_i, x \rangle}$  выпуклая. Афинное преобразование сохраняет выпуклость $ \Rightarrow f(x) = 1 + e^{\langle a_i, x \rangle}$ выпуклая. Монотонная суперпозиция сохраняет выпуклость $\Rightarrow f(x) = ln(1 + e^{ \langle a_i, x \rangle})$ выпуклая. $f(x) = \mu / 2 \|x\|^2$ выпуклая, также положителная взвешенная сумма сохраняет выпуклость $\Rightarrow f(x) = \sum _{i = 1} ^{n} c_i ln(1 + e^{\langle a_i, x \rangle}) + \mu / 2 \|x\|^2$ выпукла.
+    \item $f(x) = e^x + 1$ выпуклая, монотонная суперпозиция сохраняет выпуклость $\Rightarrow f(x) = ln(1 + e^{|x_i|})$  выпуклая. Монотонная суперпозиция сохраняет выпуклость  $\Rightarrow f(x) = c_i ln(1+e^{|x_i|}))$ выпукла. Max сохраняет выпуклость $\Rightarrow f(x) = max_{1 \leq i \leq n}(c_i ln(1+e^{|x_i|}))$ выпуклая.
+\end{enumerate}
+\end{proof}
+
+\begin{problem}
+    Пусть $f : \R^n \to R$~--- функция $f(x) := \sum_{i=1}^k x_{[i]}$, где $1 \leq k \leq n$, а символ $x_{[i]}$ обозначает $i$-ую компоненту отсортированного по убыванию вектора $x$. Покажите, что функция $f$ выпуклая. (\emph{Подсказка:} Представьте $f$ в виде максимума линейных функций.)
+\end{problem}
+
+\begin{proof}[Решение]
+        Зафиксируем на месте все координаты вектора. Количество способов выбрать из n координат k это $C^n_k$. Возьмём $C^n_k$ функций, каждая из которых равна сумме этих k координат. Так как координаты зафиксированны, то все функции линейны. Теперь наша задача свелась к нахождению максимума среди этих линейных функций, а это выпуклая функция так как это частный случай супремума.
+\end{proof}
+
+\begin{problem}
+\end{problem}
+
+\begin{proof}[Решение]
+\end{proof}
+
+\begin{problem}
+Покажите выпуклость функции
+
+$f(x) := \cfrac{ 1 }{ x_1 - \cfrac{ 1 }{ x_2 - \cfrac{ 1 }{ \ddots \, - \cfrac{ 1 }{ x_n } } } }$,
+
+определенной на подмножестве $R^n$, где каждый знаменатель строго положительный. (\emph{Подсказка:} Используйте индукцию и утверждение об операциях, сохраняющих выпуклость.)
+\end{problem}
+
+\begin{proof}[Решение]
+Докажем по индукции: База $x_1$: $f(x) = \frac{1}{x_1}$ является выпуклой. Переход: пусть верно при $x_n$, докажем, что функция будет выпукла при $x_{n + 1}$. Получим $f(x) = \frac{1}{x_{n + 1} - F(x)}$, где $F(x)$ это выпуклая функция. $x_{n + 1}$ выпукла вниз и вверх, $F(x)$ - выпукла, $-F(x)$ - вогнута $\Rightarrow x_{n + 1} - F(x)$ - вогнута. Функция $\frac{1}{y}$ является монотонно невозрастающей. Получим композицию вогнутой и монотонно невозрастающей, что является выпуклой функцией.
+\end{proof}
+
+\end{document}

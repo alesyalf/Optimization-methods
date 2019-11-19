@@ -1,0 +1,208 @@
+\documentclass[a4paper]{article}
+
+\usepackage[utf8x]{inputenc}
+\usepackage{listingsutf8}
+\usepackage{listings-ext}
+\usepackage{listings}
+\usepackage{enumitem}
+\usepackage[12pt]{extsizes}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsfonts}
+\usepackage[left=2cm,right=2cm,top=2cm,bottom=2cm,bindingoffset=0cm]{geometry}
+\usepackage{graphicx}
+\usepackage[T2A]{fontenc}
+\usepackage{amsthm}
+\usepackage{bm}
+\usepackage{fancyvrb}
+\usepackage[russian]{babel}
+
+\newtheorem{homework}{Домашнее задание №}
+\newtheorem{lemma}{Лемма}
+\newtheorem{corol}{Следствие}
+\newtheorem{theorem}{Теорема}
+\newtheorem{problem}{Задача}
+\newtheorem*{solution}{Решение}
+
+\begin{document}
+
+\begin{homework}
+Алеся Демешко, 797
+\end{homework}
+
+\begin{problem}
+Покажите, что для любых квадратных вещественных матриц выполнено $Tr(AB) = Tr(BA)$.
+\end{problem}
+
+\begin{proof}[Решение]
+Пусть $A = (a_{i j}), B = (b_{i j})$. Тогда $(AB)_{ii} = \sum _{k=1}^n a_{i k} b_{k i} 	\Rightarrow Tr(AB) = \sum _{j=1}^n \sum _{k=1}^n a_{j k} b_{k j}$. С другой стороны,
+
+\begin{align*}
+(BA)_{i i} &= \sum _{l=1}^n a_{i l} b_{l i} 	\Rightarrow Tr(BA) = \sum _{m=1}^n \sum _{l=1}^n b_{m l} a_{l m} \\ &= \sum _{l=1}^n \sum _{m=1}^n a_{l m} b_{m l} = \sum _{j=1}^n \sum _{k=1}^n a_{j k} b_{k j} \Longrightarrow Tr(AB) = Tr(BA)
+\end{align*}
+
+\end{proof}
+
+\begin{problem}
+Доказать, что для любых матриц $A \in R^{m \times k}, B \in R^{k\times n}, C \in R^{m \times n}$ имеет место $\langle AB,C \rangle = \langle B,A^TC \rangle = \langle A,CB^T \rangle$
+\end{problem}
+
+\begin{proof}[Решение]
+По определению $\langle A,B \rangle = \sum _{i=1}^m \sum _{j=1}^n a_{i j}  b_{i j}$.
+\newline
+$AB = \sum _{i=1}^m \sum _{j=1}^n \sum _{l=1}^k a_{i,l} b_{l,j} \rightarrow
+\langle AB, C\rangle = \sum _{i=1}^m \sum _{j=1}^n (AB)_{i, j} c_{i,j} =
+\sum _{i=1}^m \sum _{j=1}^n \sum _{l=1}^k a_{i,l} b_{l,j} c_{i,j}
+= \sum _{l=1}^k \sum _{j=1}^n b_{l,j} \sum _{i=1}^m a_{i,l} c_{i,j} =
+\sum _{l=1}^k \sum _{j=1}^n b_{l,j} (A^T)_{l,i} c_{i,j}=
+\sum _{l=1}^k \sum _{j=1}^n b_{l,j} (A^TC)_{l,j} = \langle B, A^TC \rangle
+$\newline
+$\langle AB, C\rangle = \sum _{l=1}^k \sum _{j=1}^n \sum _{i=1}^m a_{i,l} b_{l,j} c_{i,j} = \sum _{i=1}^m \sum _{l=1}^k a_{i,l} \sum_{j=1}^n c_{i,j} b_{l,j} = \newline = \sum _{i=1}^m \sum _{l=1}^k a_{i,l} \sum_{j=1}^n c_{i,j} B^T_{j,l} = \sum _{i=1}^m \sum _{l=1}^k a_{i,l} (CB^T)_{i, l}$
+\end{proof}
+
+\begin{problem}
+Пусть $x, y \in R^n$. Покажите, что $\langle x x^T, y y^T\rangle = \langle x, y\rangle^2$
+\end{problem}
+\begin{proof}
+По определению $\langle x,y \rangle = \sum _{i=1}^n x_i y_i$, $\langle A,B \rangle = \sum _{i=1}^m \sum_{j=1}^n a_{i j} * b_{i j}$.
+\newline С одной стороны, что такое $a_{i j}$: $a_{i j} = (xx^T)_{i j} = x_i x_j$. Аналогично, $b_{i j} = (y y^T)_{i j} = y_i y_j$. То есть мы получаем, $\langle xx^T, y y^T \rangle = \sum _{i=1}^n \sum_{j=1}^n a_{i j} * b_{i j} = \sum _{i=1, j = 1}^n x_i x_j y_i y_j$ $(1)$.
+\newline С другой стороны, $\langle x, y\rangle^2 = (\sum _{i=1}^n x_i y_i)^2 = \sum _{i=1}^n x_i y_i \sum _{j=1}^n x_j y_j = \sum _{i=1, j = 1}^n x_i x_j y_i y_j$ $(2)$
+\newline Получим в итоге $(1) = (2)$.
+\end{proof}
+
+\begin{problem} Доказать неравенство Коши-Буняковского $|\langle x, y\rangle| \leq \langle x, x\rangle^{1/2} \langle y, y\rangle^{1/2} $
+\end{problem}
+\begin{proof}
+Рассмотрим скалярное произведение $\langle t x-y, t x-y\rangle = 0$.
+\newline $0 = \langle t x-y, t x-y\rangle = t^2 \langle x, x \rangle - 2t\langle x, y \rangle + \langle y, y \rangle$ Так как у нас одно либо нет решений, то $D = 4\langle x, y \rangle^2 - 4\langle x, x \rangle\langle y, y \rangle \leq 0 \Rightarrow \langle x, y \rangle^2 \leq\langle x, x \rangle\langle y, y \rangle \Rightarrow \langle x, y \rangle \leq\langle x, x \rangle^{1/2} \langle y, y \rangle^{1/2}$
+\end{proof}
+
+\begin{problem} Пусть $x \in R^n$. Докажите следующие неравенства: $\|x\|_\infty \leq \|x\|_2 \leq \sqrt{n}\|x\|_\infty$ \newline
+$\frac{1}{\sqrt{n}}$ $\|x\|_1 \leq \|x\|_2 \leq \|x\|_1$.
+\end{problem}
+\begin{proof}
+1) $\|x\|_\infty = max_{1 \leq i \leq n} |x| \leq |x_{max}| + (\sum _{i=1, i != i_{max}}^n x_i^2)^{1/2} = ((x_{max})^2)^{1/2}2 + (\sum _{i=1, i != i_{max}}^n x_i^2)^{1/2} = (\sum _{i=1}^n x_i^2)^{1/2} = \|x\|_2$
+\newline $\|x\|_2 = (\sum _{i=1}^n x_i^2)^{1/2} \leq (\sum _{i=1}^n x^2_{max})^{1/2} = (n x_{max}^2)^{1/2} = \sqrt{n}\|x\|_\infty$
+\newline2) Докажем, что $\frac{1}{\sqrt{n}}(|x_1| + ... + |x_n|) \leq \sqrt{x_1^2 + ... + x_n^2}$. Возведём в квадрат: $\frac{1}{n}(|x_1| + ... + |x_n|)^2 \leq x_1^2 + ... + x_n^2 \Leftrightarrow (|x_1| + ... + |x_n|)^2 \leq n(x_1^2 + ... + x_n^2) \Leftrightarrow (|x_1| + ... + |x_n|)^2 \leq (1 + ... + 1)(x_1^2 + ... + x_n^2)$, где $(1 + ... + 1) = n$, неравeнство верно так как это неравенство Коши-Буняковского.
+\newline $\sqrt{x_1^2 + ... + x_n^2} \leq |x_1| + ... + |x_n|$. Возведём в квадрат: $x_1^2 + ... + x_n^2 \leq (|x_1| + ... + |x_n|)^2$, что очевидно верно.
+\end{proof}
+
+\begin{problem} Упростите каждое из следующих выражений:
+	\begin{enumerate}[label=(\alph*)]
+		\item $\det(A X B(C^{-T}X^TC)^{-T})$, где $A, B, C, D \in R^{n \times n}, \det(C) \neq 0, \det(C^{-T}X^TC) \neq 0$;
+		\item $\|u v^T-A\|_F^2-\|A\|_F^2$, где $u \in R^m, v \in R^n, A \in R^{m \times n}$;
+		\item $Tr((2I_n+a a^T)^{-1}(u v^T+v u^T))$, где $a, u, v \in R^n$;
+		\item  $\sum _{i=1}^n\langle S^{-1}a_i,a_i\rangle$, где $a_1, ..., a_n \in R^n, S := \sum _{i=1}^n a_i a_i^T, \det(S) \neq 0$;
+	\end{enumerate}
+\end{problem}
+\begin{proof}
+\begin{enumerate}[label=(\alph*)]
+\item Из линейной алгебры $(AB)^T = B^TA^T$ и $(AB)^{-1} = B^{-1}A^{-1}$. Тогда
+$(C^{-T}X^TC)^{-T} = (C^{-T}X^{-T}C)^T = C X^{-1}C^{-T}$.
+В итоге получим
+\begin{align*}
+&\det(A X B C X^{-1}C^{-1}) = \det(A)\det(X)\det(B)\det(C)\det(X^{-1})\det(C^{-T}) = \\ &= \det(A)\det(B)\det(X)\det(X^{-1})\det(C)\det(C^{-T}) = \\ &= \det(A)\det(B)\det(C)\det(C^{-T})
+\end{align*}
+\item $\|u v^T-A\|_F^2-\|A\|_F^2 = \sum _{i=1}^m \sum _{j=1}^n (u_i v_j - A_{i j})^2 - = \sum _{i=1}^m \sum _{j=1}^n A_{i j}^2 = \sum _{i=1}^m \sum _{j=1}^n(u_i v_j - 2A_{i j})(u_i v_j) = \sum _{i=1}^m \sum _{j=1}^n u_i^2 v_j^2 - \sum _{i=1}^m \sum _{j=1}^n 2u_i A_{i j}  v_j = \langle u, u \rangle \langle v, v \rangle - 2\langle v u^T, A \rangle$
+\item
+\item
+\end{enumerate}
+\end{proof}
+
+\begin{problem} Пусть f это одна из следующих функций. Нужно вычислить первую и вторую производные f.
+\begin{enumerate}[label=(\alph*)]
+\item $f : E \rightarrow R$ - функция $f(t) := \det(A - t I_n)$, где $A \in R^{n \times n}, E := \{t \in R: \det(A - t I_n \neq 0\}$
+\item $f : R_{++} \rightarrow R$ - функция $f(t) := |(A + t I_n)^{-1}b|^2$, где $A \in S^n_+, B \in R^n$
+\end{enumerate}
+\end{problem}
+\begin{proof} 
+    \begin{enumerate}[label=(\alph*)]
+        \item Первая производная: 
+        \begin{align*}
+        &d(\det(A - t I_n)) =  \det(A - t I_n) \langle (A - t I_n)^{-T}, d(A - t I_n) \rangle = \\ & =\det(A - t I_n) \langle (A - t I_n)^{-T}, -I_n d t_1 \rangle =  - \det(A - t I_n) \langle (A - t I_n)^{-T}, I_n d t_1 \rangle
+        \end{align*}
+        Вторая производная:
+        \begin{align*}
+        &d^2(\det(A - t I_n)) =  d(-\det(A - t I_n) \langle(A - t I_n)^{-T}, I_n d t_1\rangle) = \\ & = - d(\det(A - t I_n))  \langle(A - t I_n)^{-T}, I_n d t_1\rangle - \det(A - t I_n) d( \langle(A - t I_n)^{-T}, I_n d t_1\rangle) = \\ & = - \det(A - t I_n) \langle(A - t I_n)^{-T}, I_n d t_2\rangle  \langle(A - t I_n)^{-T}, I_n d t_1\rangle - \det(A - t I_n) \langle d(A - t I_n)^{-T}, I_n d t_1\rangle = \\ & = - \det(A - t I_n) \langle(A - t I_n)^{-T}, I_n d t_2\rangle  \langle(A - t I_n)^{-T}, I_n d t_1\rangle - \det(A - t I_n) \langle (d(A - t I_n)^{-1})^T, I_n d t_1\rangle = \\ & = - \det(A - t I_n) \langle(A - t I_n)^{-T}, I_n d t_2\rangle  \langle(A - t I_n)^{-T}, I_n d t_1\rangle - \det(A - t I_n)* \\ &  *\langle(-(A - t I_n)^{-1}) (-I_n d t_2)(A - t I_n)^{-1})^{T}, I_n d t_1\rangle = - \det(A - t I_n) \langle(A - t I_n)^{-T}, I_n d t_2\rangle * \\ & * \langle(A - t I_n)^{-T}, I_n d t_1\rangle - \det(A - t I_n) \langle(A - t I_n)^{-1} (I_n d t_2)(A - t I_n)^{-1})^{T}, I_n d t_1\rangle
+        \end{align*}
+        \item Первая производная:
+        \begin{align*}
+        &d(|(A+t I_n)^{-1}b|^2 ) = 2|(A+t I_n)^{-1}b|d(|(A+t I_n)^{-1}b| ) = 2|(A+t I_n)^{-1}b|d((A+t I_n)^{-1}b) = \\ & = 2(-(A+t I_n)^{-1} d(A+t I_n)(A+t I_n)^{-1} b)(A+t I_n)^{-1}b = 2(-(A+t I_n)^{-1} I_n d t_1 (A+t I_n)^{-1} b) * \\ & * (A+t I_n)^{-1}b = 2((A+t I_n)^{-1})^3b d t_1
+        \end{align*}
+        Вторая производная:
+        \begin{align*}
+        &d(2((A+t I_n)^{-1})^3b d t_1) = 2*3((A+t I_n)^{-1})^2b d t_1 d(((A+t I_n)^{-1}) = \\ & = 6((A+t I_n)^{-1})^2b d t_1(-A+t I_n)^{-1}d(A+t I_n)(A+t I_n)^{-1}) = 6((A+t I_n)^{-1})^4b d t_1 d t_2
+        \end{align*}
+    \end{enumerate}
+\end{proof}
+
+\begin{problem} Пусть f одна из следующих функций. Для каждой вычислите градиент и матрицу Гессе.
+\newline По определению, матрица Гессе: \newline
+$\begin{pmatrix}
+ \ \frac{\partial^2 f}{\partial x_1^2} &\ ... &\  \frac{\partial^2 f}{\partial x_1 \partial x_n }\\
+ \ . &\ . &\ . \\
+ \ \frac{\partial^2 f}{\partial x_1x_n} &\ ... &\  \frac{\partial^2 f}{\partial x_n^2 }
+\end{pmatrix}$
+\begin{enumerate}[label=(\alph*)]
+\item $f: R^n \rightarrow R$ - функция $f(x) := \frac{1}{2}\|xx^T - A\|^2_F$, где $A \in S^n$
+\item $f: R^n \backslash \{0\} \rightarrow R$ - функция $f(x) := \frac{\langle Ax, x \rangle}{|x|^2}$, где $A \in S^n$
+\item $f: R^n \backslash \{0\} \rightarrow R$ - функция $f(x) := \langle x, x \rangle ^ {\langle x, x \rangle}$
+\end{enumerate}
+\end{problem}
+\begin{proof}
+    \begin{enumerate}[label=(\alph*)]
+        \item $f = \frac{1}{2}\|xx^T-A \|^2_F = \frac{1}{2}\sum _{i = 1}^n \sum _{j = 1}^n x_i x_j - a_{i, j}^2$; \newline
+        $\nabla f = \frac{1}{2}(\sum _{i \neq 1}^n 2x_1 + 2x_i, ..., \sum _{i \neq n}^n 2x_n + 2x_i) = (\sum _{i \neq 1}^n x_1 + x_i, ..., \sum _{i \neq n}^n x_n + x_i)$
+        \newline Найдём теперь $\nabla ^2 f$. Каждая строка матрицы будет иметь вид: $(1, ..., 1)$ т. к. в каждой компоненте градиента встречается один раз $x_i$, и при взятии производной он становится 1, а все остальные $x_j$ обнуляются. В итоге получим единичную матрицу $I_n$
+        
+        \item \begin{align*}
+        f = \frac{<Ax, x>}{|x|^2} = \frac{\sum _{i = 1} ^n (Ax)_{i} x_i}{\sum _{i = 1} ^n x_i^2} = \frac{\sum _{i = 1} ^n x_i \sum_{j = 1}^n a_{i, j}x_j}{\sum _{i = 1} ^n x_i^2}
+        \end{align*}
+        
+        \begin{align*}
+        &\frac{\partial  f}{\partial x_k} = \frac{(\sum _{i = 1} ^n  \sum_{j = 1}^n a_{i, j} x_i x_j)^{'}*(\sum _{i = 1} ^n x_i^2) + (\sum _{i = 1} ^n  \sum_{j = 1}^n a_{i, j} x_i x_j)*(\sum _{i = 1} ^n x_i^2)^{'}}{(\sum _{i = 1} ^n x_i^2)^2} = \\ &= \frac{(\sum _{i \neq k}^n 2x_k a_{k, k} + x_i a_{k, i} + x_i a_{i, k})*(\sum _{i = 1} ^n x_i^2) + (\sum _{i = 1} ^n \sum_{j = 1}^n a_{i, j} x_i x_j)*(2x_k)}{(\sum _{i = 1} ^n x_i^2)^2}
+        \end{align*}
+        
+        \begin{align*}
+        &\frac{\partial ^2 f}{\partial x_k x_t} = \frac{(\sum _{i \neq k}^n 2x_k a_{k, k} + x_i a_{k, i} + x_i a_{i, k})^{'}*(\sum _{i = 1} ^n x_i^2) + (\sum _{i \neq k}^n 2x_k a_{k, k} + x_i a_{k, i} + x_i a_{i, k})*(\sum _{i = 1} ^n x_i^2)^{'}}{(\sum _{i = 1} ^n x_i^2)^4} + \\ &+  \frac{(\sum _{i = 1} ^n \sum_{j = 1}^n a_{i, j} x_i x_j)^{'}*(2x_k) + (\sum _{i = 1} ^n \sum_{j = 1}^n a_{i, j} x_i x_j)*(2x_k)^{'}}{(\sum _{i = 1} ^n x_i^2)^4} = \frac{(a_{k, t} + a_{t, k})*(\sum _{i = 1} ^n x_i^2)}{(\sum _{i = 1} ^n x_i^2)^4} +
+        \end{align*}
+        
+        \begin{align*}
+        &+ \frac{(\sum _{i \neq k}^n 2x_k a_{k, k} + x_i a_{k, i} + x_i a_{i, k})*(2 x_t) + (\sum _{i \neq t}^n 2x_t a_{t, t} + x_i a_{t, i} + x_i a_{i, t})*(2x_k)}{(\sum _{i = 1} ^n x_i^2)^4}
+        \end{align*}
+        
+        \item $\langle x,x \rangle^{\langle x,x \rangle} = \exp^{\langle x,x \rangle \ln{\langle x,x \rangle}}$
+        \begin{align*}
+        \frac{\partial  f}{\partial x_k} = \exp^{\langle x,x \rangle \ln{\langle x,x \rangle}}(2x_k \ln{\langle x,x \rangle} + {\langle x,x \rangle} \frac{1}{{\langle x,x \rangle}}2x_k) = \exp^{\langle x,x \rangle \ln{\langle x,x \rangle}}(2x_k \ln{\langle x,x \rangle} + 2x_k)
+        \end{align*}
+        \begin{align*}
+        \frac{\partial ^2 f}{\partial x_k \partial x_t} = \exp^{\langle x,x \rangle \ln{\langle x,x \rangle}}(2x_t \ln{\langle x,x \rangle} + 2x_t)(2x_k \ln{\langle x,x \rangle} + 2x_k) + \exp^{\langle x,x \rangle \ln{\langle x,x \rangle}} \frac{2x_k 2x_t}{\langle x,x \rangle}
+        \end{align*}
+    \end{enumerate}
+\end{proof}
+
+\begin{problem} Пусть $f : S^n_{++} \rightarrow R$ - одна из следующих функций:
+    \begin{enumerate}[label=(\alph*)]
+        \item $f(X) := Tr(X^{-1})$
+        \item $f(X) := \langle X^{-1} v, v\rangle$, где $v \in R^n$
+        \item $f(X) := (\det(X))^{1/n}$
+    \end{enumerate}
+Для каждого из указанных вариантов покажите, что вторая производная имеет постоянный знак
+\end{problem}
+\begin{proof}
+    \begin{enumerate}[label=(\alph*)]
+        \item
+        \item Найдём первую производную:  $d(\langle X^{-1} v, v\rangle) = \langle d X^{-1} v, v\rangle = \langle -X^{-1}(d X)X^{-1} v, v\rangle$. Аналогично, вторая производная будет представлять из себя скалярное произведение, которое всегда положительно.
+        \item Найдём первую производную: 
+        \begin{align*}
+        &d((\det(X))^{1/n}) = \frac{1}{n}((\det(X)^{-\frac{n-1}{n}})d(\det(X)) = \frac{1}{n}((\det(X)^{-\frac{n-1}{n}})\det(X)\langle X^{-T}, d x_1 \rangle = \\ & = \frac{1}{{n}}((\det(X)^{\frac{1}{n}})\langle X^{-T}, d x_1 \rangle
+        \end{align*}
+        Найдём вторую производную:
+        \begin{align*}
+        &d(\frac{1}{n}((\det(X)^{\frac{1}{n}})\langle X^{-T}, d x_1 \rangle) = \frac{1}{n}(d((\det(X)^{\frac{1}{n}})) \langle X^{-T}, d x_1 \rangle + (\det(X)^{\frac{1}{n}})d(\langle X^{-T}, d x_1 \rangle)) = \\ &= \frac{1}{n}(\frac{1}{{n}}((\det(X)^{\frac{1}{n}})\langle X^{-T}, d x_2 \rangle \langle X^{-T}, d x_1 \rangle + (\det(X)^{\frac{1}{n}})(\langle d X^{-T}, d x_1 \rangle + \langle X^{-T}, d d x_1 \rangle))
+        \end{align*}
+        Заметим, что знак второй производной зависит только от знака детерминанта, так как все скалярные произведения положительны. Так как у нас матрица положительно определённая, то следовательно у неё все главные миноры положительны, а значит и самый большой главный минор то есть детерминант. В итоге, получили, что вторая производная всегда положительна.
+\end{enumerate}
+\end{proof}
+
+\end{document}
